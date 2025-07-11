@@ -1,0 +1,39 @@
+{% extends "layout/appLayout.html" %}
+
+{% block content %}
+
+<main>
+  <div class="container-fluid">
+    <h1 class="mt-4">Categories</h1>
+    <ol class="breadcrumb mb-4">
+      <li class="breadcrumb-item active">Categories</li>
+    </ol>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+            <tr>
+              <td>{{ category.name }}</td>
+              <td><a href="/categories/edit?id={{ category.id }}">Edit</a></td>
+              <td><a href="/categories/delete?id={{ category.id }}">Delete</a></td>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

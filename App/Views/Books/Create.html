@@ -1,0 +1,124 @@
+{% extends 'layout/appLayout.html' %}
+
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Add Book</h1>
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header">
+                        <h3 class="text-center font-weight-light my-2">Add Book</h3>
+                    </div>
+
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data" action="/books/store">
+                            <div class="form-group">
+                                <label class="small mb-1">Title :</label>
+                                <input class="form-control py-4" name="title" required type="text" placeholder="Enter title"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-1">ISBN :</label>
+                                <input class="form-control py-4" name="isbn" required type="text" placeholder="Enter isbn"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-1">Cover :</label>
+                                <input class="form-control" name="cover"  type="file"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-1">Gallery :</label>
+                                <input class="form-control" name="gallery[]" multiple type="file"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="small mb-1">Category :</label>
+                                <select name="category_id" required class="form-control">
+                                    <option value="0">Zgjedh kategory</option>
+                                    {% for category in categories %}
+                                        <option value="{{ category.id }}">{{ category.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <div id="authors">
+                                    <div class="form-group mb-3" style="gap: 5px">
+                                        <label class="small mb-1">Author :</label>
+                                        <select class="form-control " required name="author_ids[]">
+                                            <option selected>Choose an author</option>
+                                            {% for author in authors %}
+                                            <option value="{{ author.id }}">{{ author.first_name }} {{ author.last_name }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: start; gap: 10px; margin-top: auto;">
+                                <div class="mb-3" style="gap: 5px">
+                                    <button type="button" class="btn btn-light" id="removeSelectAuthor">
+                                        <svg width="20" height="20" viewBox="0 0 448 512" fill="#990000">
+                                            <path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/>
+                                        </svg>
+                                        Author
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="mb-3" style="gap: 5px">
+                                <button type="button" class="btn btn-light" id="createSelectAuthor">
+                                    <svg width="20" height="20" viewBox="0 0 448 512" fill="#009900">
+                                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
+                                    </svg>
+                                    Author
+                                </button>
+                            </div>
+
+                            <input class="btn btn-primary" value="Save" type="submit" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var createBtn = document.getElementById('createSelectAuthor');
+        var container = document.getElementById('authors');
+
+        createBtn.addEventListener('click', function () {
+            var newElement = document.createElement('p');
+            newElement.innerHTML = '           <div class="form-group mb-3" style="gap: 5px">\n' +
+                '                                <label class="small mb-1">Author :</label>\n' +
+                '                                <select class="form-control" required name="author_ids[]">\n' +
+                '                                    <option selected>Choose an author</option>\n' +
+                '                                    {% for author in authors %}\n' +
+                '                                    <option value="{{ author.id }}">{{ author.first_name }} {{ author.last_name }}</option>\n' +
+                '                                    {% endfor %}\n' +
+                '                                </select>\n' +
+                '                            </div>';
+
+            // Append the new element to the container
+            container.appendChild(newElement);
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var removeBtn = document.getElementById('removeSelectAuthor');
+        var container = document.getElementById('authors');
+        removeBtn.addEventListener('click', function () {
+            var lastElement = container.lastElementChild;
+            if (lastElement) {
+                container.removeChild(lastElement);
+            }
+        });
+    });
+
+</script>
+
+{% endblock %}

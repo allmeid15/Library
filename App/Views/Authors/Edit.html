@@ -1,0 +1,39 @@
+{% extends 'layout/appLayout.html' %}
+
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Edit Author</h1>
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header">
+                        <h3 class="text-center font-weight-light my-2">Edit Author</h3>
+                    </div>
+
+                    <div class="card-body">
+                        <form method="post" action="/authors/update">
+                            <input value="{{ author.id }}" name="id" type="hidden"/>
+
+                            <div class="form-group">
+                                <label class="small mb-1">First name :</label>
+                                <input class="form-control py-4" value="{{ author.first_name }}" name="first_name" type="text" placeholder="Enter first name"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-1">Last name :</label>
+                                <input class="form-control py-4" value="{{ author.last_name }}" name="last_name" type="text" placeholder="Enter last name"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-1">Country :</label>
+                                <input class="form-control py-4" value="{{ author.country }}" name="country" type="text" placeholder="Enter country"/>
+                            </div>
+                            <input class="btn btn-primary" value="Save" type="submit" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

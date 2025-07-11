@@ -1,0 +1,15 @@
+[02-Jun-2025 14:30:46 UTC] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\laragon\www\online-library\public\route.php(12): Core\Router->dispatch('users')
+#1 C:\laragon\www\online-library\public\index.php(21): require('C:\\laragon\\www\\...')
+#2 {main}
+Thrown in 'C:\laragon\www\online-library\Core\Router.php' on line 128
+[02-Jun-2025 15:23:27 UTC] Uncaught exception: 'Illuminate\Database\Eloquent\ModelNotFoundException' with message 'No query results for model [App\Models\User] 100'
+Stack trace: #0 C:\laragon\www\online-library\vendor\illuminate\support\Traits\ForwardsCalls.php(23): Illuminate\Database\Eloquent\Builder->findOrFail('100')
+#1 C:\laragon\www\online-library\vendor\illuminate\database\Eloquent\Model.php(2330): Illuminate\Database\Eloquent\Model->forwardCallTo(Object(Illuminate\Database\Eloquent\Builder), 'findOrFail', Array)
+#2 C:\laragon\www\online-library\vendor\illuminate\database\Eloquent\Model.php(2342): Illuminate\Database\Eloquent\Model->__call('findOrFail', Array)
+#3 C:\laragon\www\online-library\App\Controllers\UserController.php(31): Illuminate\Database\Eloquent\Model::__callStatic('findOrFail', Array)
+#4 C:\laragon\www\online-library\Core\Router.php(119): App\Controllers\UserController->edit()
+#5 C:\laragon\www\online-library\public\route.php(17): Core\Router->dispatch('users/edit')
+#6 C:\laragon\www\online-library\public\index.php(21): require('C:\\laragon\\www\\...')
+#7 {main}
+Thrown in 'C:\laragon\www\online-library\vendor\illuminate\database\Eloquent\Builder.php' on line 489

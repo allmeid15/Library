@@ -1,0 +1,60 @@
+{% extends 'layout/appLayout.html' %}
+
+
+{% block content %}
+
+
+    <div class="container-fluid">
+        <h1 class="mt-4">Books</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Books</li>
+        </ol>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Cover</th>
+                            <th>Title</th>
+                            <th>ISBN</th>
+                            <th>Authors</th>
+                            <th>Category</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for book in books %}
+                        <tr>
+                            <td><img width="150" src="/uploads/{{ book.cover }}"></td>
+                            <td>{{ book.title }}</td>
+                            <td>{{ book.isbn }}</td>
+
+                            <td>
+                                {% for author in book.authors %}
+                                <p>{{ author.first_name }} {{ author.last_name }}</p>
+                                {% endfor %}
+                            </td>
+
+                            <td>{{ book.category.name }}</td>
+                            <td><a href="/books/edit?id={{ book.id }}">Edit</a></td>
+                            <td>
+                                <form method="get"
+                                      action="/books/delete"
+                                      onsubmit="return confirm('Do you really want to delete?');">
+                                    <input type="hidden" name="id" value="{{ book.id }}"/>
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
